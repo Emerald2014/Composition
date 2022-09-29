@@ -1,7 +1,7 @@
 package ru.kudesnik.composition.domain.entity
 
 enum class Level {
-    TESTER,
+    TEST,
     EASY,
     NORMAL,
     HARD
