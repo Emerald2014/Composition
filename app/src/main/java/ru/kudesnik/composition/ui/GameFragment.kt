@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import ru.kudesnik.composition.R
 import ru.kudesnik.composition.databinding.FragmentGameBinding
+import ru.kudesnik.composition.domain.entity.GameResult
+import ru.kudesnik.composition.domain.entity.GameSettings
 import ru.kudesnik.composition.domain.entity.Level
 
 class GameFragment : Fragment() {
@@ -33,15 +35,13 @@ class GameFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.tvLeftNumber.setOnClickListener {
-            launchGameFinishedFragment()
+            launchGameFinishedFragment(
+                GameResult(
+                    true, 0, 0,
+                    GameSettings(0, 0, 0, 0)
+                )
+            )
         }
-    }
-
-    private fun launchGameFinishedFragment() {
-        requireActivity().supportFragmentManager.beginTransaction()
-            .replace(R.id.main_container, GameFinishedFragment())
-            .addToBackStack(null)
-            .commit()
     }
 
     override fun onDestroyView() {
@@ -53,7 +53,15 @@ class GameFragment : Fragment() {
         level = requireArguments().getSerializable(KEY_LEVEL) as Level
     }
 
+    private fun launchGameFinishedFragment(gameResult: GameResult) {
+        requireActivity().supportFragmentManager.beginTransaction()
+            .replace(R.id.main_container, GameFinishedFragment.newInstance(gameResult))
+            .addToBackStack(null)
+            .commit()
+    }
+
     companion object {
+        const val NAME = "GameFragment"
         private const val KEY_LEVEL = "level"
         fun newInstance(level: Level): GameFragment {
             return GameFragment().apply {
