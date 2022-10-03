@@ -14,7 +14,8 @@ import ru.kudesnik.composition.domain.entity.Question
 import ru.kudesnik.composition.domain.usecases.GenerateQuestionUseCase
 import ru.kudesnik.composition.domain.usecases.GetGameSettingsUseCase
 
-class GameViewModel(private val level: Level, application: Application) : AndroidViewModel(application) {
+class GameViewModel(private val level: Level, application: Application) :
+    AndroidViewModel(application) {
 
     private lateinit var gameSettings: GameSettings
 
