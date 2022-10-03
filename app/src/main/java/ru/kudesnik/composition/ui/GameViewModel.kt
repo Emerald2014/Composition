@@ -19,7 +19,6 @@ class GameViewModel(private val level: Level, application: Application) :
 
     private lateinit var gameSettings: GameSettings
 
-
     private val context = application
 
     private val repository = GameRepositoryImpl

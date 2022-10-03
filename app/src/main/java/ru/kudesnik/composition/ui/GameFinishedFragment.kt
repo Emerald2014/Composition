@@ -32,36 +32,12 @@ class GameFinishedFragment : Fragment() {
         binding.buttonRetry.setOnClickListener {
             retryGame()
         }
-        bindViews()
+        binding.gameResult = args.gameResult
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-    private fun bindViews() {
-        with(binding) {
-            emojiResult.setImageResource(getSmileResId())
-            tvRequiredAnswers.text = context?.resources?.let {
-                String.format(
-                    it.getString(R.string.required_score),
-                    args.gameResult.gameSettings.minCountOfRightAnswers
-                )
-            }
-            tvScoreAnswers.text = String.format(
-                getString(R.string.score_answers),
-                args.gameResult.countOfRightAnswers
-            )
-            tvRequiredPercentage.text = String.format(
-                getString(R.string.required_percentage),
-                args.gameResult.gameSettings.minPercentOfRightAnswers
-            )
-            tvScorePercentage.text = String.format(
-                getString(R.string.score_percentage),
-                getPercentOfRightAnswers()
-            )
-        }
     }
 
     private fun getSmileResId(): Int {
